@@ -1,10 +1,13 @@
-class Cell:
-    __size = 10
+import pygame
 
-    def __init__(self, x, y, visibility=False):
+
+class Cell:
+    __size = 40
+
+    def __init__(self, x, y, life_state=False):
         self.__x = x
         self.__y = y
-        self.__visibility = visibility
+        self.__life_state = life_state
 
     @property
     def x(self):
@@ -26,5 +29,10 @@ class Cell:
     def size(cls):
         return cls.__size
 
-    def change_visibility(self):
-        self.__visibility = not self.__visibility
+    def change_life_state(self):
+        self.__life_state = not self.__life_state
+
+    def draw(self, screen, horizontal_margin, vertical_margin):
+        color = pygame.Color('green') if self.__life_state else pygame.Color('white')
+        pygame.draw.rect(screen, color,
+                         (self.x + horizontal_margin, self.y + vertical_margin, self.size(), self.size()))
