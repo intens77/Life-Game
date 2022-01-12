@@ -5,7 +5,7 @@ from cell import Cell
 
 class GameField:
     def __init__(self, width=545, height=545):
-        self.__window = pygame.display.set_mode((width, height))
+        self.__window = pygame.Surface((width, height))
         self.__window.fill(pygame.Color('black'))
         pygame.display.set_caption('Game of Life')
         self.__width_in_pixels = width
@@ -36,11 +36,15 @@ class GameField:
     def cells_margin(self):
         return self.__cells_margin
 
+    @property
+    def surface(self):
+        return self.__window
+
     def create_cells(self):
         return [[Cell(x, y) for x in range(0, self.width_in_pixels, Cell.size())]
                 for y in range(0, self.height_in_pixels, Cell.size())]
 
-    def draw_field(self):
+    def draw(self):
         for row_index in range(self.height_in_cells):
             for column_index in range(self.width_in_cells):
                 cell = self.get_cell(row_index, column_index)
@@ -49,3 +53,8 @@ class GameField:
 
     def get_cell(self, row_index, column_index):
         return self.__cells[row_index][column_index]
+
+    def find_clicked_cell(self, x, y):
+        row_index, column_index = y // (Cell.size() + self.cells_margin), x // (
+                Cell.size() + self.cells_margin)
+        return self.get_cell(row_index, column_index)
