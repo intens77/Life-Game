@@ -12,3 +12,4 @@ class MyButton(Button):
         super(MyButton, self).setInactiveColour(inactive_color)
         super(MyButton, self).setHoverColour(hover_color)
         super(MyButton, self).setPressedColour(pressed_color)
+

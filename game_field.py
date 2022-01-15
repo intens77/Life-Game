@@ -6,8 +6,6 @@ from cell import Cell
 class GameField:
     def __init__(self, width=545, height=545):
         self.__window = pygame.Surface((width, height))
-        self.__window.fill(pygame.Color('black'))
-        pygame.display.set_caption('Game of Life')
         self.__width_in_pixels = width
         self.__height_in_pixels = height
         self.__cells_margin = 5
@@ -40,9 +38,17 @@ class GameField:
     def surface(self):
         return self.__window
 
+    @property
+    def cells(self):
+        return self.__cells
+
     def create_cells(self):
         return [[Cell(x, y) for x in range(0, self.width_in_pixels, Cell.size())]
                 for y in range(0, self.height_in_pixels, Cell.size())]
+
+    @property
+    def cells(self):
+        return self.__cells
 
     def draw(self):
         for row_index in range(self.height_in_cells):
