@@ -1,6 +1,6 @@
 import pygame
 
-from cell import Cell
+from model.cell import Cell
 
 
 class GameField:
@@ -47,15 +47,8 @@ class GameField:
                 for y in range(0, self.height_in_pixels, Cell.size())]
 
     @property
-    def cells(self):
-        return self.__cells
-
-    def draw(self):
-        for row_index in range(self.height_in_cells):
-            for column_index in range(self.width_in_cells):
-                cell = self.get_cell(row_index, column_index)
-                cell.draw(self.__window, (column_index + 1) * self.__cells_margin,
-                          (row_index + 1) * self.__cells_margin)
+    def window(self):
+        return self.__window
 
     def get_cell(self, row_index, column_index):
         return self.__cells[row_index][column_index]
@@ -64,3 +57,6 @@ class GameField:
         row_index, column_index = y // (Cell.size() + self.cells_margin), x // (
                 Cell.size() + self.cells_margin)
         return self.get_cell(row_index, column_index)
+
+    def set_cells(self, new_cells):
+        self.__cells = new_cells
