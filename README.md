@@ -9,5 +9,6 @@ pip3 install -r requirements.txt
 ### Запуск игры  
 Игра запускается из консоли (из папки с файлом main.py).  
 Команда для запуска:  
-python3 main.py
+Linux, Mac OS: python3 main.py  
+Windows: python main.py
 
